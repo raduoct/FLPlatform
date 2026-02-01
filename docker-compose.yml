@@ -1,0 +1,86 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-node}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nodepass}
+      POSTGRES_DB: ${POSTGRES_DB:-node}
+    volumes:
+      - ./storage/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  # mlflow:
+  #   # Optional but recommended for an evolvable PoC
+  #   # You can also use: image: ghcr.io/mlflow/mlflow (depends on availability)
+  #   build:
+  #     context: ./services/mlflow
+  #   environment:
+  #     MLFLOW_BACKEND_STORE_URI: postgresql://${POSTGRES_USER:-node}:${POSTGRES_PASSWORD:-nodepass}@postgres:5432/${POSTGRES_DB:-node}
+  #     MLFLOW_DEFAULT_ARTIFACT_ROOT: /mlflow/artifacts
+  #   volumes:
+  #     - ./storage/mlflow:/mlflow
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - "5000:5000"
+
+  # api:
+  #   build:
+  #     context: ./services/api
+  #   env_file:
+  #     - ./.env
+  #   environment:
+  #     DATABASE_URL: postgresql://${POSTGRES_USER:-node}:${POSTGRES_PASSWORD:-nodepass}@postgres:5432/${POSTGRES_DB:-node}
+  #     REDIS_URL: redis://redis:6379/0
+  #     STORAGE_ROOT: /storage
+  #     MLFLOW_TRACKING_URI: http://mlflow:5000
+  #   volumes:
+  #     - ./storage:/storage
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #     - mlflow
+  #   ports:
+  #     - "8000:8000"
+
+  # worker:
+  #   build:
+  #     context: ./services/worker
+  #   env_file:
+  #     - ./.env
+  #   environment:
+  #     DATABASE_URL: postgresql://${POSTGRES_USER:-node}:${POSTGRES_PASSWORD:-nodepass}@postgres:5432/${POSTGRES_DB:-node}
+  #     REDIS_URL: redis://redis:6379/0
+  #     STORAGE_ROOT: /storage
+  #     MLFLOW_TRACKING_URI: http://mlflow:5000
+  #   volumes:
+  #     - ./storage:/storage
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #     - mlflow
+  #   # GPU (optional):
+  #   # If you have NVIDIA Container Toolkit installed, uncomment:
+  #   # deploy:
+  #   #   resources:
+  #   #     reservations:
+  #   #       devices:
+  #   #         - capabilities: [gpu]
+
+  # ui:
+  #   build:
+  #     context: ./services/ui
+  #   environment:
+  #     NEXT_PUBLIC_API_BASE: http://localhost:8000
+  #   depends_on:
+  #     - api
+  #   ports:
+  #     - "3000:3000"
