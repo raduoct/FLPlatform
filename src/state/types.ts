@@ -15,6 +15,8 @@ export type Job = {
 export type Study = {
   study_id: string;
   filename: string;
+  image_url?: string;
+  overlay_url?: string;
   label?: "PNEUMONIA" | "NORMAL";
   split?: "train" | "val" | "test";
   added_at: string;

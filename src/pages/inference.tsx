@@ -95,7 +95,7 @@ export default function InferencePage() {
               <Typography variant="subtitle2" sx={{ color: "text.secondary", mb: 1 }}>
                 Visualization
               </Typography>
-              <StudyViewer baseUrl={lastInference.image_urls.base} overlayUrl={lastInference.image_urls.overlay} />
+              <StudyViewer baseUrl={selectedStudy?.image_url ?? ""} overlayUrl={selectedStudy?.overlay_url} />
             </CardContent>
           </Card>
         </Box>

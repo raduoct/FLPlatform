@@ -1,10 +1,10 @@
 import { FederatedPlan, FederatedRound, InferenceResult, Job, ModelSummary, Study } from "../state/types";
 
 export const seedStudies: Study[] = [
-  { study_id: "S-1001", filename: "patient_001.png", label: "PNEUMONIA", split: "train", added_at: new Date().toISOString() },
-  { study_id: "S-1002", filename: "patient_002.png", label: "NORMAL", split: "train", added_at: new Date().toISOString() },
-  { study_id: "S-1003", filename: "patient_003.png", label: "PNEUMONIA", split: "val", added_at: new Date().toISOString() },
-  { study_id: "S-1004", filename: "patient_004.png", label: "NORMAL", split: "test", added_at: new Date().toISOString() }
+  { study_id: "S-1001", filename: "patient_001.png", image_url: "/studies/overlay.png", overlay_url: "/overlays/overlay.png", label: "PNEUMONIA", split: "train", added_at: new Date().toISOString() },
+  { study_id: "S-1002", filename: "patient_002.png", image_url: "/studies/overlay.png", overlay_url: "/overlays/overlay.png", label: "NORMAL", split: "train", added_at: new Date().toISOString() },
+  { study_id: "S-1003", filename: "patient_003.png", image_url: "/studies/overlay.png", overlay_url: "/overlays/overlay.png", label: "PNEUMONIA", split: "val", added_at: new Date().toISOString() },
+  { study_id: "S-1004", filename: "patient_004.png", image_url: "/studies/overlay.png", overlay_url: "/overlays/overlay.png", label: "NORMAL", split: "test", added_at: new Date().toISOString() }
 ];
 
 // Use public placeholder images for PoC UI visuals

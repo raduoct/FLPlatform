@@ -26,7 +26,8 @@ export default function StudyViewer({ baseUrl, overlayUrl }: { baseUrl: string; 
         sx={{
           position: "relative",
           width: "100%",
-          maxWidth: 760,
+          maxWidth: 420,
+          maxHeight: 520,
           borderRadius: 3,
           overflow: "hidden",
           border: "1px solid",
@@ -47,7 +48,7 @@ export default function StudyViewer({ baseUrl, overlayUrl }: { baseUrl: string; 
               inset: 0,
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              objectFit: "contain",
               opacity: overlayOpacity,
               mixBlendMode: "multiply"
             }}

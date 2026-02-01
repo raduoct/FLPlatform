@@ -56,8 +56,12 @@ export default function FederatedPage() {
               <TableRow key={r.round_id}>
                 <TableCell sx={{ fontFamily: "monospace" }}>{r.round_id}</TableCell>
                 <TableCell>{r.status}</TableCell>
-                <TableCell>{r.submitted_at ? new Date(r.submitted_at).toLocaleString() : "—"}</TableCell>
-                <TableCell>{r.decided_at ? new Date(r.decided_at).toLocaleString() : "—"}</TableCell>
+                <TableCell>
+                  {r.submitted_at ? new Date(r.submitted_at).toISOString().replace("T", " ").slice(0, 19) + "Z" : "—"}
+                </TableCell>
+                <TableCell>
+                  {r.decided_at ? new Date(r.decided_at).toISOString().replace("T", " ").slice(0, 19) + "Z" : "—"}
+                </TableCell>
                 <TableCell>{r.notes ?? "—"}</TableCell>
               </TableRow>
             ))}

@@ -74,6 +74,11 @@ export function NodeStateProvider({ children }: { children: React.ReactNode }) {
     const job_id = id("J");
     const created_at = nowIso();
     setJobs(prev => [{ job_id, kind: "infer", status: "queued", created_at, message: "Queued inference" }, ...prev]);
+    const study = studies.find(s => s.study_id === study_id);
+    const DEFAULT_BASE = "";
+    const DEFAULT_OVERLAY = "";
+    const base = study?.image_url ?? DEFAULT_BASE;
+    const overlay = study?.overlay_url ?? DEFAULT_OVERLAY;
 
     // simulate queue -> running -> done
     setTimeout(() => {
@@ -93,8 +98,8 @@ export function NodeStateProvider({ children }: { children: React.ReactNode }) {
         latency_ms: 180 + Math.floor(Math.random() * 120),
         created_at: nowIso(),
         image_urls: {
-          base: "https://images.unsplash.com/photo-1582719478185-2f293d8ae52a?auto=format&fit=crop&w=1200&q=60",
-          overlay: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=60"
+          base: base,
+          overlay: overlay
         }
       };
 
